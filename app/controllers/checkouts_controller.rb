@@ -19,7 +19,9 @@ class CheckoutsController < ApplicationController
 		        amount: project.current_donation_amount,
 		        currency: "inr",
 		        quantity: 1
-		    }]
+		    }],
+		    success_url: root_url,
+		    cancel_url: root_url,
 		)
 		@portal_session = current_user.payment_processor.billing_portal
 
