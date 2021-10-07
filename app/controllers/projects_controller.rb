@@ -9,18 +9,18 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
-    current_user.processor = :stripe
-    current_user.customer
+    # current_user.processor = :stripe
+    # current_user.customer
 
-    @checkout_session = current_user.payment_processor.checkout(
-      mode: "payment",
-      line_items: "price_1JNy8KSC08iXPDHnVEL5rtTZ"
+    # @checkout_session = current_user.payment_processor.checkout(
+    #   mode: "payment",
+    #   line_items: "price_1JNy8KSC08iXPDHnVEL5rtTZ"
 
-      # mode: "subscription",
-      # line_items: "price_1JO2UBSC08iXPDHnlqiGouIo"
-      )
+    #   # mode: "subscription",
+    #   # line_items: "price_1JO2UBSC08iXPDHnlqiGouIo"
+    #   )
 
-    @portal_session = current_user.payment_processor.billing_portal
+    # @portal_session = current_user.payment_processor.billing_portal
   end
 
   # GET /projects/new

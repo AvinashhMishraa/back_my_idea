@@ -46,8 +46,8 @@
         <p class="text-sm font-semibold text-gray-500 uppercase">Description</p>
         <%= project.description %>
         <%= button_to "Buy now!", checkouts_show_path, params: {id: project.id, mode: "payment"}, remote: true %>
-        <%= render partial: "pay/stripe/checkout_button", locals: {session: @checkout_session, title: "Checkout"} %>
-        <%= link_to 'Billing Portal', @portal_session.url, class: "btn btn-sm btn-outlined btn-default" %>
+        <%#= render partial: "pay/stripe/checkout_button", locals: {session: @checkout_session, title: "Checkout"} %>
+        <%#= link_to 'Billing Portal', @portal_session.url, class: "btn btn-sm btn-outlined btn-default" %>
       </div>
     </div>
   </div>
