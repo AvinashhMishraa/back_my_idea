@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   post "checkouts/show", to: "checkouts#show"
 
+  resources :webhooks, only: [:create]
+
   resource :subscription
 
   root to: 'projects#index'
