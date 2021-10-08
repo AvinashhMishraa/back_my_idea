@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
   post "checkouts/show", to: "checkouts#show"
+  get "success", to: "checkouts#success"
+  get "cancel", to: "checkouts#cancel"
 
   resources :webhooks, only: [:create]
 

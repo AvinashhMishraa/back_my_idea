@@ -9,6 +9,12 @@ class Project < ApplicationRecord
   scope :active, ->{ where(status: "active") }
   scope :inactive, ->{ where(status: "inactive") }
 
+  after_create do
+    project = Stripe::Product.create(name: self.title)
+    price = Stripe::Price.create(product: project.id, unit_amount: self.price.to_i, currency: "inr")
+    update(stripe_product_id: project.id, stripe_price_id: price.id)
+  end
+
   def backers
     # find users who backed a specific project
   end

@@ -1,4 +1,5 @@
 class WebhooksController < ApplicationController
+  skip_before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
 
   def create
@@ -24,10 +25,15 @@ class WebhooksController < ApplicationController
     case event.type
     when 'checkout.session.completed'
       session = event.data.object
-      @project = Project.find_by(current_donation_amount: session.amount_total)
-      @project.increment!(:sales_count)
-    end
 
+      session_with_expand = Stripe::Checkout::Session.retrieve({ id: session.id, expand: ["line_items"]})
+      session_with_expand.line_items.data.each do |line_item|
+        project = Project.find_by(stripe_product_id: line_item.price.product)
+        project.increment!(:sales_count)
+      end
+    end
+    
     render json: { message: 'success' }
   end
+
 end
