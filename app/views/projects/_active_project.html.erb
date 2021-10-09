@@ -45,10 +45,19 @@
       <div class="mb-6">
         <p class="text-sm font-semibold text-gray-500 uppercase">Description</p>
         <%= project.description %>
-        <%= button_to "Buy now!", checkouts_show_path, params: {id: project.id, mode: "payment"}, remote: true, data: { disable_with: "validating..."} %>
+        <%#= button_to "Buy now!", checkouts_show_path, params: {id: project.id, mode: "payment"}, remote: true, data: { disable_with: "validating..."} %>
         
         <%#= render partial: "pay/stripe/checkout_button", locals: {session: @checkout_session, title: "Checkout"} %>
         <%#= link_to 'Billing Portal', @portal_session.url, class: "btn btn-sm btn-outlined btn-default" %>
+
+
+        <% if @cart.include?(project) %>
+          <%= button_to "Remove from cart", remove_from_cart_path(project), method: :delete, class: "btn btn-default inline-block text-center my-2 bg-yellow-500" %>
+        <% else %>
+          <%= button_to "Add to cart", add_to_cart_path(project), class: "btn btn-default inline-block text-center my-2 bg-yellow-500" %>
+        <% end %>
+
+
       </div>
     </div>
   </div>

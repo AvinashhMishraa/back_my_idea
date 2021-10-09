@@ -1,9 +1,36 @@
 class CheckoutsController < ApplicationController
     before_action :authenticate_user!
 
-	def show
-		project = Project.find(params[:id])
+	# def show
+	# 	binding.pry
+	# 	project = Project.find(params[:id])
 
+	# 	current_user.processor = :stripe
+	# 	current_user.customer
+
+	# 	@checkout_session = current_user.payment_processor.checkout(
+	# 		mode: params[:mode],
+	# 	    # line_items: "price_1JNy8KSC08iXPDHnVEL5rtTZ"
+
+	# 	    # mode: "subscription",
+	# 	    # line_items: "price_1JO2UBSC08iXPDHnlqiGouIo"
+
+	# 	    line_items: [{
+	# 	        price: project.stripe_price_id,
+	# 	        quantity: 1
+	# 	    }],
+	# 	    success_url: success_url + "?checkout_session_id={CHECKOUT_SESSION_ID}",
+	# 	    cancel_url: cancel_url,
+	# 	)
+	# 	# $checkout_session1 = @checkout_session
+	# 	@portal_session = current_user.payment_processor.billing_portal
+
+	# 	respond_to do |format|
+	# 	    format.js
+	# 	end
+	# end
+
+	def show
 		current_user.processor = :stripe
 		current_user.customer
 
@@ -14,10 +41,7 @@ class CheckoutsController < ApplicationController
 		    # mode: "subscription",
 		    # line_items: "price_1JO2UBSC08iXPDHnlqiGouIo"
 
-		    line_items: [{
-		        price: project.stripe_price_id,
-		        quantity: 1
-		    }],
+		    line_items: @cart.collect { |item| item.to_builder.attributes! },
 		    success_url: success_url + "?checkout_session_id={CHECKOUT_SESSION_ID}",
 		    cancel_url: cancel_url,
 		)

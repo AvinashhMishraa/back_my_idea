@@ -1,6 +1,19 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :add_to_cart, :remove_from_cart]
+
+  # def add_to_cart
+  #   id = params[:id].to_i
+  #   session[:cart] << id unless session[:cart].include?(id)
+  #   redirect_to projects_path
+  # end
+
+  # def remove_from_cart
+  #   id = params[:id].to_i
+  #   session[:cart].delete(id)
+  #   redirect_to projects_path
+  # end
+
 
   # GET /projects or /projects.json
   def index
@@ -74,7 +87,7 @@ class ProjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params[:id])
+      @project = Project.find(params[:id]) if params[:id] != "shoppingcart"
     end
 
     # Only allow a list of trusted parameters through.
