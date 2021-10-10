@@ -1,1 +1,24 @@
-<h1>Cancelled</h1>
+<div class="container relative p-6 mx-auto text-gray-900 bg-white rounded-lg lg:p-10">
+	<div class="flex flex-wrap items-center justify-between w-full pb-4 mb-8 border-b-2 border-gray-200">
+		
+		<p class="text-xl text-base text-red-600 leading-none text-black-800 text-center">Sorry, your order could not be placed.</p>
+		<br>
+		<p class="text-base text-base text-red-600 leading-none text-black-800 text-center">Payment Failed, Please Try Again</p>
+
+	</div>
+
+		<div class="flex flex-wrap items-start justify-start">
+		  <% @cart.each do |project| %>
+		    <div class="relative w-full p-6 mb-6 border-2 border-blue-700 rounded-lg lg:w-1/4 lg:mr-8">
+		      <%= image_tag project.thumbnail, class: "rounded" if project.thumbnail.present? %>
+		      <h3 class="mb-2 text-2xl font-bold"><%= project.title %></h3>
+		      <div class="my-1"><%= truncate(strip_tags(project.description.to_s), length: 140) %></div>
+		      <p class="text-sm italic opacity-75">Created by: <%= project.user.name %> </p>
+		      <%= link_to "View project", project, class: "btn btn-default inline-block text-center my-2" %>
+		    </div>
+		  <% end %>
+		</div>
+
+
+	
+</div>

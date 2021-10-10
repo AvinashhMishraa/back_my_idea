@@ -2,7 +2,6 @@ class CheckoutsController < ApplicationController
     before_action :authenticate_user!
 
 	# def show
-	# 	binding.pry
 	# 	project = Project.find(params[:id])
 
 	# 	current_user.processor = :stripe
@@ -54,9 +53,15 @@ class CheckoutsController < ApplicationController
 	end
 
 	def success
-		@session_with_expand = Stripe::Checkout::Session.retrieve({ id: params[:checkout_session_id], expand: ["line_items"]})
-		@session_with_expand.line_items.data.each do |line_item|
-		  project = Project.find_by(stripe_product_id: line_item.price.product)
+		if params[:checkout_session_id].present?
+			# session.delete(:cart)
+			session[:cart] = []
+			@session_with_expand = Stripe::Checkout::Session.retrieve({ id: params[:checkout_session_id], expand: ["line_items"]})
+			@session_with_expand.line_items.data.each do |line_item|
+			  project = Project.find_by(stripe_product_id: line_item.price.product)
+			end
+		else
+			redirect_to cancel_url, alert: "No info to display"
 		end
 	end
 
