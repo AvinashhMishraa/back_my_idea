@@ -10,9 +10,11 @@ class Project < ApplicationRecord
   scope :active, ->{ where(status: "active") }
   scope :inactive, ->{ where(status: "inactive") }
 
+  monetize :price, as: :price_cents
+
   after_create do
     project = Stripe::Product.create(name: self.title)
-    price = Stripe::Price.create(product: project.id, unit_amount: self.price.to_i, currency: "inr")
+    price = Stripe::Price.create(product: project.id, unit_amount: self.price.to_i, currency: self.currency)
     update(stripe_product_id: project.id, stripe_price_id: price.id)
   end
 
@@ -37,7 +39,7 @@ class Project < ApplicationRecord
 
 
   def create_and_assign_new_stripe_price
-    price = Stripe::Price.create(product: self.stripe_product_id, unit_amount: self.price.to_i, currency: "inr")
+    price = Stripe::Price.create(product: self.stripe_product_id, unit_amount: self.price.to_i, currency: self.currency)
     update(stripe_price_id: price.id)
   end
 

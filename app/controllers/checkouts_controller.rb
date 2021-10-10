@@ -41,6 +41,7 @@ class CheckoutsController < ApplicationController
 		    # line_items: "price_1JO2UBSC08iXPDHnlqiGouIo"
 
 		    line_items: @cart.collect { |item| item.to_builder.attributes! },
+		    allow_promotion_codes: true,
 		    success_url: success_url + "?checkout_session_id={CHECKOUT_SESSION_ID}",
 		    cancel_url: cancel_url,
 		)

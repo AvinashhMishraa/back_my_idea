@@ -21,10 +21,18 @@
     <%= form.text_field :title, class: "input" %>
   </div>
 
-  <div class="mb-6">
-    <%= form.label :price, class: "label" %>
-    <%= form.text_field :price, class: "input" %>
-  </div>
+  
+  <dev class="flex flex-row space-x-4">
+    <div class="mb-6">
+      <%= form.label :price, class: "label" %>
+      <%= form.text_field :price_cents, class: "input" %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :currency, class: "label" %>
+      <%= form.text_field :currency, class: "input" %>
+    </div>
+  </dev>
 
   <div class="mb-6">
     <%= form.label :donation_goal, class: "label" %>

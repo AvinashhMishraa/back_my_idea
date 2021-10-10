@@ -45,6 +45,8 @@
       <div class="mb-6">
         <p class="text-sm font-semibold text-gray-500 uppercase break-words">Description</p>
         <%= project.description %>
+
+        <%= project.price_cents %>
         <%#= button_to "Buy now!", checkouts_show_path, params: {id: project.id, mode: "payment"}, remote: true, data: { disable_with: "validating..."} %>
         
         <%#= render partial: "pay/stripe/checkout_button", locals: {session: @checkout_session, title: "Checkout"} %>
