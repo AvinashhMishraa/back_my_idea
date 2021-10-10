@@ -1,3 +1,4 @@
+<div class="container relative p-6 mx-auto text-gray-900 bg-white rounded-lg lg:p-10">
 <div class="flex flex-wrap items-start justify-start">
   <% @projects.each do |project| %>
     <div class="relative w-full p-6 mb-6 border-2 border-blue-700 rounded-lg lg:w-1/4 lg:mr-8">
@@ -17,3 +18,9 @@
     </div>
   <% end %>
 </div>
+</div>
+
+<div class="container relative p-6 mx-auto text-white-900 rounded-lg lg:p-10">
+<%= paginate @projects%>
+</div>
+

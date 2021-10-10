@@ -12,6 +12,8 @@ class Project < ApplicationRecord
 
   monetize :price, as: :price_cents
 
+  paginates_per 3
+
   after_create do
     project = Stripe::Product.create(name: self.title)
     price = Stripe::Price.create(product: project.id, unit_amount: self.price.to_i, currency: self.currency)
