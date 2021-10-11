@@ -20,6 +20,8 @@ require("channels")
 require("trix")
 require("@rails/actiontext")
 
+require("jquery")
+
 import "stylesheets/application"
 // import "controllers"
 // import "components/stripe";

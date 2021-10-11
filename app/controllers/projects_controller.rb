@@ -2,39 +2,23 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show, :add_to_cart, :remove_from_cart]
 
-  # def add_to_cart
-  #   id = params[:id].to_i
-  #   session[:cart] << id unless session[:cart].include?(id)
-  #   redirect_to projects_path
-  # end
-
-  # def remove_from_cart
-  #   id = params[:id].to_i
-  #   session[:cart].delete(id)
-  #   redirect_to projects_path
-  # end
-
-
   # GET /projects or /projects.json
   def index
     # @projects = Project.all
     @projects = Project.page params[:page]
+
+    respond_to do |format|
+      # binding.pry
+      format.html
+      # format.json  { render :json => @projects }
+      # format.js { render 'index.js.erb' }
+      format.js
+    end
+
   end
 
   # GET /projects/1 or /projects/1.json
   def show
-    # current_user.processor = :stripe
-    # current_user.customer
-
-    # @checkout_session = current_user.payment_processor.checkout(
-    #   mode: "payment",
-    #   line_items: "price_1JNy8KSC08iXPDHnVEL5rtTZ"
-
-    #   # mode: "subscription",
-    #   # line_items: "price_1JO2UBSC08iXPDHnlqiGouIo"
-    #   )
-
-    # @portal_session = current_user.payment_processor.billing_portal
   end
 
   # GET /projects/new

@@ -1,0 +1,2 @@
+$("#project-wrap").html("<%= escape_javascript render(@projects) %>");
+$("#pagination-wrap").html("<%= escape_javascript(paginate(@projects, remote: true)) %>");
