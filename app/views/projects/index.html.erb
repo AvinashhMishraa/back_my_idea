@@ -1,13 +1,14 @@
 <div class="container relative p-6 mx-auto text-gray-900 bg-white rounded-lg lg:p-10">
-    <div id="project-wrap" class="flex flex-wrap items-start justify-start">
+    <div id="project-wrap" class="flex flex-wrap items-start justify-center">
       <% @projects.each do |project| %>
         <%= render 'project', project: project%>
       <% end %>
     </div>
 </div>
 
-<div id="pagination-wrap" class="container relative p-6 mx-auto text-white-900 rounded-lg lg:p-10">
+<div id="pagination-wrap" class="container relative p-6 text-white-900 rounded-lg lg:p-10 flex flex-wrap justify-center">
     <%= paginate @projects, remote: true %>
     <%#= paginate @projects %>
 </div>
+
 
