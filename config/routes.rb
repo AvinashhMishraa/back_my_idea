@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   delete "projects/remove_from_cart/:id", to: "shoppingcart#remove_from_cart", as: "remove_from_cart"
   get "checkout/cart", to: "shoppingcart#show", as: "shoppingcart"
 
+  get "search", to: "projects#search"
 
   resource :subscription
 

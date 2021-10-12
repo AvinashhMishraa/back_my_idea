@@ -6,14 +6,36 @@ class ProjectsController < ApplicationController
   def index
     # @projects = Project.all
     @projects = Project.page params[:page]
+    # @query = params[:q] ||= ""
+    # @projects = Project.where("title LIKE?", "%#{@query}%").page params[:page]
 
     respond_to do |format|
-      # binding.pry
       format.html
       # format.json  { render :json => @projects }
       # format.js { render 'index.js.erb' }
       format.js
     end
+  end
+
+  def search
+    # if params[:q].blank?
+    #   @projects = Project.page params[:page]
+    # else
+    #   @query = params[:q]
+    #   # @projects = Project.search(params[:q]).page params[:page]  # we can write the logic in Project model itself
+    #   # @projects = Project.where("title LIKE?", "%" + params[:q] + "%")
+    #   @projects = Project.where("title LIKE?", "%#{@query}%").page params[:page]
+    # end
+
+    @query = params[:q] ||= ""
+    @projects = Project.where("title LIKE?", "%#{@query}%").page params[:page]
+
+    render "index"
+    
+    # respond_to do |format|
+    #   format.js   { render :index }
+    #   format.html { render :index }
+    # end
 
   end
 
@@ -79,4 +101,5 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :price, :price_cents, :currency, :donation_goal, :description, :thumbnail)
     end
+
 end
