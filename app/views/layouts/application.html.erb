@@ -44,7 +44,7 @@
             <%= link_to "New Project", new_project_path, class: "btn btn-white mb-2 lg:mb-0" %>
           </div>
 
-          <div class="input-group ml-40 mb-0.5 w-auto">
+          <div class="input-group ml-72 mb-0.5 w-auto">
             <%= form_with(url: "/search", method: "get", local: true) do %>
               <%= label_tag(:q,"") %>
               <%= text_field_tag(:q) %>
