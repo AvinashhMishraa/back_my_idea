@@ -27,8 +27,10 @@ class ProjectsController < ApplicationController
     #   @projects = Project.where("LOWER(title) LIKE?", "%#{@query}%".downcase).page params[:page]
     # end
 
+    # @projects = Project.where("LOWER(title) LIKE?", "%#{@query}%".downcase).page params[:page]
+
     @query = params[:q] ||= ""
-    @projects = Project.where("LOWER(title) LIKE?", "%#{@query}%".downcase).page params[:page]
+    @projects = Project.search(params[:q]).page params[:page]  # we can write the logic in Project model itself
 
     render "index"
     

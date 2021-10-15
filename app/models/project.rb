@@ -45,7 +45,20 @@ class Project < ApplicationRecord
   end
 
   def self.search(params)
-    where("LOWER(title) LIKE?", "%#{params}%")
+    # where("LOWER(title) LIKE?", "%#{params}%")
+    
+    projects = []
+    projects << Project.left_joins(:comments).where("LOWER(projects.title) LIKE :query OR LOWER(projects.status) LIKE :query OR LOWER(comments.body) LIKE :query", query: "%#{params}%".downcase)
+
+    projects << Project.where(id: ActionText::RichText.all.where("body LIKE ?", "%#{params}%".downcase).pluck(:record_id))
+
+    return Project.where(id: ((projects[0] | projects[1]).pluck(:id)))
+
+    # Nokogiri::HTML(Project.find(36).description.body.to_s).text.strip
+    # ActionController::Base.helpers.strip_tags(Project.last.description.body.to_s).strip
+    # Project.last.description.to_plain_text
+    # Project.with_rich_text_description
+    
   end
 
 end
