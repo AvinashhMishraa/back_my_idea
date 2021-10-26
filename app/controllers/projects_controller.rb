@@ -18,6 +18,39 @@ class ProjectsController < ApplicationController
   end
 
   def search
+    ############################## with elasticsearch-searckick ############################
+
+    # @query = params[:q] ||= ""
+    # project_ids = []
+
+    # #@projects = Project.search(@query, fields: ["title^4", "status"], match: :word_middle, page: params[:page], per_page: 3, misspellings: {edit_distance: 3})
+    
+    # # @results = Searchkick.search(@query, match: :word_middle, misspellings: {edit_distance: 3}, models: [Project, Comment])
+
+    # @results = Searchkick.search(@query, fields: ["title", "status", "body"], match: :word_middle, misspellings: {edit_distance: 3}, models: [Project, Comment])
+
+    # @results.hits.each_with_index do |result, idx|
+    #   if result["_index"].include? "comment"
+    #     project_ids << Project.find(Comment.find(result["_id"]).commentable_id).id
+    #   else
+    #     project_ids << Project.find(result["_id"]).id
+    #   end
+    # end
+
+    # project_ids << ActionText::RichText.all.where("body LIKE ?", "%#{@query}%".downcase).pluck(:record_id)
+
+    # @projects = Project.where(id: project_ids.flatten).page params[:page]
+
+    # # render "index"
+
+
+    # respond_to do |format|
+    #   format.html { render "index.html.erb"}
+    #   format.js { render "search.js.erb" }
+    # end
+
+    ############################## without elasticsearch-searckick ############################
+
     # if params[:q].blank?
     #   @projects = Project.page params[:page]
     # else
@@ -32,12 +65,12 @@ class ProjectsController < ApplicationController
     @query = params[:q] ||= ""
     @projects = Project.search(params[:q]).page params[:page]  # we can write the logic in Project model itself
 
-    render "index"
+    # render "index"
     
-    # respond_to do |format|
-    #   format.js   { render :index }
-    #   format.html { render :index }
-    # end
+    respond_to do |format|
+      format.js   { render :search }
+      format.html { render :index }
+    end
 
   end
 

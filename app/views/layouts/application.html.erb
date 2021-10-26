@@ -47,11 +47,14 @@
           <div class="items-center block w-full mt-2 text-center lg:flex lg:flex-row lg:flex-1 lg:mt-0 lg:text-left lg:justify-end">
 
             <div class="searchbar">
-              <%= form_with(url: "/search", method: "get", local: true) do %>
-                <%= label_tag(:q,"") %>
-                <%= text_field_tag(:q) %>
+              <%= form_with(url: "/search", method: "get", local: true) do |form|%>
+                <%#= label_tag(:q,"") %>
+                <%#= text_field_tag(:q) %>
+                <%= form.text_field :q, id: "query", placeholder: 'Search' %>
+                <!-- <input type="search" placeholder="Enter name..." data-behavior="autocomplete" name="q" id="query"> -->
                 <span class="input-group-btn">
-                  <%= submit_tag "Search", class: 'btn btn-default search-btn' %>
+                  <%#= submit_tag "Search", class: 'btn btn-default search-btn' %>
+                  <%#= form.submit "Search", class: 'btn btn-default search-btn' %>
                 </span>
               <% end %>
             </div>
@@ -82,7 +85,7 @@
 
 
 <style type="text/css">
-  #q {
+  #query {
     height: 33px;
   }
 
@@ -90,8 +93,15 @@
         margin-right: 9px;
     }
 
+  /*#query {
+        margin-right: 9px;
+    }*/
+
     .search-btn {
       height: 36px;
     }
 
 </style>
+
+
+<%= javascript_pack_tag "projects.js" %>

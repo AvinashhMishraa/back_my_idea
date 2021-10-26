@@ -1,4 +1,6 @@
 class Project < ApplicationRecord
+  # searchkick word_middle: [:title, :status]
+  # searchkick
   belongs_to :user
   has_rich_text :description
   has_one_attached :thumbnail
@@ -58,8 +60,17 @@ class Project < ApplicationRecord
     # ActionController::Base.helpers.strip_tags(Project.last.description.body.to_s).strip
     # Project.last.description.to_plain_text
     # Project.with_rich_text_description
-    
   end
+
+
+  # for searchkick
+  # def search_data
+  #   {
+  #     title: title,
+  #     status: status
+  #   }
+  # end
+
 
 end
 
