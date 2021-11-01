@@ -2,9 +2,11 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show, :add_to_cart, :remove_from_cart]
 
+  # before_action :force_json, only: :search
+
   # GET /projects or /projects.json
   def index
-    # @projects = Project.all
+    @titles = Project.pluck(:title)
     @projects = Project.page params[:page]
     # @query = params[:q] ||= ""
     # @projects = Project.where("title LIKE?", "%#{@query}%").page params[:page]
@@ -14,6 +16,7 @@ class ProjectsController < ApplicationController
       # format.json  { render :json => @projects }
       # format.js { render 'index.js.erb' }
       format.js
+      # format.json{ render json: @titles}
     end
   end
 
@@ -66,11 +69,17 @@ class ProjectsController < ApplicationController
     @projects = Project.search(params[:q]).page params[:page]  # we can write the logic in Project model itself
 
     # render "index"
+    # render json: {project_titles: @projects.pluck(:title)}
+    @all_projects = Project.all
     
     respond_to do |format|
       format.js   { render :search }
       format.html { render :index }
+      # format.json {@project_titles = @projects.pluck(:title)}
+      format.json{ render json: @all_projects}
     end
+
+
 
   end
 
@@ -136,5 +145,9 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :price, :price_cents, :currency, :donation_goal, :description, :thumbnail)
     end
+
+    # def force_json
+    #   request.format = :json
+    # end
 
 end

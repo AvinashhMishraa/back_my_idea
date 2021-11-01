@@ -1,19 +1,3 @@
-// document.addEventListener("turbolinks: load", function() {
-//   var options = {
-//     data: ["John", "Paul", "George", "Ringo"]
-//   };
-//   $('*[data-behavior="autocomplete"]').easyAutocomplete(options);
-// });
-
-
-// query = document.querySelector("#query")
-
-// query.addEventListener("input", (event)=>{
-//   console.log(event.srcElement.value)
-// })
-
-
-
 const axios = require("axios");
 import { debounce } from "./debounce.js";
 

@@ -46,12 +46,13 @@
 
           <div class="items-center block w-full mt-2 text-center lg:flex lg:flex-row lg:flex-1 lg:mt-0 lg:text-left lg:justify-end">
 
-            <div class="searchbar">
+            <div id= "search-data" class="searchbar">
               <%= form_with(url: "/search", method: "get", local: true) do |form|%>
                 <%#= label_tag(:q,"") %>
                 <%#= text_field_tag(:q) %>
-                <%= form.text_field :q, id: "query", placeholder: 'Search' %>
-                <!-- <input type="search" placeholder="Enter name..." data-behavior="autocomplete" name="q" id="query"> -->
+                <% @titles = Project.pluck(:title)%>
+                <%= form.text_field :q, id: "query", placeholder: 'Search', data: {behavior: "autocomplete"} %>
+                <!-- <input type="search" placeholder="Search" data-behavior="autocomplete" name="q" id="query"> -->
                 <span class="input-group-btn">
                   <%#= submit_tag "Search", class: 'btn btn-default search-btn' %>
                   <%#= form.submit "Search", class: 'btn btn-default search-btn' %>
@@ -102,6 +103,42 @@
     }
 
 </style>
+
+<!-- <script type="text/javascript">
+  var options = {
+    data: JSON.parse("<%#=@titles%>".replace(/&quot;/g,'"'))
+    // JSON.parse("[&quot;Project 1&quot;, &quot;Project 2&quot;]".replace(/&quot;/g,'"'))
+    // data: ["Project 1", "Project 2", "Project 3", "Project 4", "Project 5", "Project 6"]
+  };
+  $('*[data-behavior="autocomplete"]').easyAutocomplete(options);
+</script> -->
+
+<script type="text/javascript">
+  $input = $('*[data-behavior="autocomplete"]')
+  var options = {
+    // data: JSON.parse("<%#=@titles%>".replace(/&quot;/g,'"'))
+    // JSON.parse("[&quot;Project 1&quot;, &quot;Project 2&quot;]".replace(/&quot;/g,'"'))
+    // data: ["Project 1", "Project 2", "Project 3", "Project 4", "Project 5", "Project 6"]
+
+      getValue: "title",
+      url: function(phrase) {
+        return "/search.json?q=" + phrase;
+        // return "/search.json?phrase=" + phrase + "&format=json";
+      },
+      theme: "blue-light",
+      list: {
+        onChooseEvent: function() {
+          var url = "<%=projects_url%>" + "/" + $input.getSelectedItemData().id;
+          // var url = "http://localhost:3000/projects/" + $input.getSelectedItemData().id;
+          // console.log(url)
+          $input.val("");
+          Turbolinks.visit(url);
+        }
+      }
+  };
+  $input.easyAutocomplete(options);
+  // $('*[data-behavior="autocomplete"]').easyAutocomplete(options);
+</script>
 
 
 <%= javascript_pack_tag "projects.js" %>
