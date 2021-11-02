@@ -5,12 +5,12 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
 
 
-  # for searchkick
-  def search_data
-    {
-      body: body
-    }
-  end
+  # # for searchkick
+  # def search_data
+  #   {
+  #     body: body
+  #   }
+  # end
 
 
 end

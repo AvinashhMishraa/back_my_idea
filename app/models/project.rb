@@ -46,7 +46,7 @@ class Project < ApplicationRecord
     update(stripe_price_id: price.id)
   end
 
-  def self.search(params)
+  def self.search(params)  # need to uncomment this method to use elasticsearch
     # where("LOWER(title) LIKE?", "%#{params}%")
     
     projects = []
@@ -63,7 +63,7 @@ class Project < ApplicationRecord
   end
 
 
-  # for searchkick
+  # # for searchkick
   # def search_data
   #   {
   #     title: title,

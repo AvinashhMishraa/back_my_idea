@@ -46,7 +46,6 @@ class ProjectsController < ApplicationController
 
     # # render "index"
 
-
     # respond_to do |format|
     #   format.html { render "index.html.erb"}
     #   format.js { render "search.js.erb" }
@@ -70,16 +69,15 @@ class ProjectsController < ApplicationController
 
     # render "index"
     # render json: {project_titles: @projects.pluck(:title)}
-    @all_projects = Project.all
+    # @project_choices = Project.search(params[:q]).order(:title).limit(5)
+    @project_choices = Project.where("LOWER(title) LIKE?", "%#{@query}%".downcase).order(:title).limit(5)
     
     respond_to do |format|
       format.js   { render :search }
       format.html { render :index }
       # format.json {@project_titles = @projects.pluck(:title)}
-      format.json{ render json: @all_projects}
+      format.json{ render json: @project_choices}
     end
-
-
 
   end
 
