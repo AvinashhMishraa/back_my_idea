@@ -40,7 +40,7 @@
           </button>
         </div>
         <div class="items-center block w-full text-center lg:flex-1 lg:flex lg:text-left">
-          <div class="space-x-1 flex flex-row">
+          <div class="space-x-2 flex flex-row">
             <%= link_to "New Project", new_project_path, class: "btn btn-white mb-2 lg:mb-0" %>
 
             <%= link_to 'Categories', categories_path , class: "btn btn-white mb-2 lg:mb-0 w-28" %>
@@ -53,17 +53,13 @@
               <%#= form.submit %>
             <%# end %>
 
-
             <%= form_tag("/categories", method: 'get', class: "category-filter") do %>
               <%#= label_tag(:category_id, "Select a Category") %>
               <%= collection_select(:category, :id, Category.order(:name), :id, :name, options = {include_blank: ""}, html_options = {:onchange => "clickFilterSubmit()"}) %>
               <%= submit_tag("", id: "search_submit")%>
             <% end %>
 
-
             <%##########################################################################################%>
-
-
 
           </div>
 
@@ -127,15 +123,21 @@
 
     #category_id {
       width: 16px !important;
-      height: 35px;
+      height: 12px;
       background-color: white;
-      margin-left: -25px !important;
+      margin-left: -26px !important;
+      margin-top: 12px !important;
       /*border-radius: 5px;*/
 
     }
 
-    /*.category-filter{
-      margin-left: -32px !important;
+    #category_id:hover {
+      color: black;
+    }
+
+    /*.category-filter:hover {
+      background-color: lightblue;
+      color: red;
     }*/
 
 </style>
