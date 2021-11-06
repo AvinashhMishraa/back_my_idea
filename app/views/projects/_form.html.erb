@@ -21,7 +21,11 @@
     <%= form.text_field :title, class: "input" %>
   </div>
 
-  
+  <div class="mb-6">
+    <%= form.label :categories, class: "label" %>
+    <%= form.collection_select :category_ids, Category.order(:name), :id, :name, {}, {class: 'select2 w-full box-border bg-white border-solid border-2 border-gray-600 z-50', multiple: true}%>
+  </div>
+
   <dev class="flex flex-row space-x-4">
     <div class="mb-6">
       <%= form.label :price, class: "label" %>
@@ -48,3 +52,55 @@
     <%= form.submit class: "btn btn-default"%>
   </div>
 <% end %>
+
+
+<script type="text/javascript">
+  $('.select2').select2();
+</script>
+
+<style type="text/css">
+  .select2-selection__choice__display{
+    background-color: white;
+    color: red;
+  }
+  .select2-results{
+    background-color: blue;
+    color: white;
+  }
+  /*.select2-results__options{
+    background-color: blue;
+    color: white;
+  }*/
+  /*.select2-results__option[aria-selected=true] { background-color: teal !important; }*/
+  .select2-results__option[aria-selected=true]{
+    background-color: #00BFFF !important;
+  }
+  .select2-results__option--selectable{
+    background-color: blue;
+    color: white;
+  }
+  .select2-results__option{
+    background-color: rgba(30, 64, 175, var(--tw-bg-opacity));
+    color: white;
+  }
+  .select2-results__option--highlighted{
+    background-color: indigo;
+    color: white;
+  }
+  .select2-selection__choice__display{
+    background-color: rgba(30, 64, 175, var(--tw-bg-opacity));
+    color: white;
+  }
+  .select2-search{
+    background-color: white;
+    color: white;
+  }
+  /*.select2-search--inline{
+    background-color: blue;
+    color: red;
+  }*/
+  .select2-results__option--selected{
+    background-color: white;
+    color: black;
+  }
+</style>

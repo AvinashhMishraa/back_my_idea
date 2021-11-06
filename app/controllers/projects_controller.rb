@@ -141,7 +141,7 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:title, :price, :price_cents, :currency, :donation_goal, :description, :thumbnail)
+      params.require(:project).permit(:title, :price, :price_cents, :currency, :donation_goal, :description, :thumbnail, :category_ids=>[])
     end
 
     # def force_json

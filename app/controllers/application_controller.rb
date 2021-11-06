@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def authenticate_admin
+    redirect_to root_url, alert: "Ah Ah Ah! You didn't say the magic word!" unless current_user && current_user.admin?
+  end
+
   private
 
     def initialize_session

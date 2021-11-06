@@ -1,0 +1,69 @@
+<!-- <p id="notice"><%#= notice %></p>
+
+<h1>Categories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%# @categories.each do |category| %>
+      <tr>
+        <td><%#= category.name %></td>
+        <td><%#= link_to 'Show', category %></td>
+        <td><%#= link_to 'Edit', edit_category_path(category) %></td>
+        <td><%#= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <%# end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Category', new_category_path %> -->
+
+
+
+<div class="container relative p-6 mx-auto text-gray-900 bg-white rounded-lg lg:p-10">
+  
+  <div class="category-header p-4 text-center text-white">
+    <h1 class="header text-5xl text-blue text-left"> Categories </h1>
+  </div>
+
+  <div class="container relative p-6 mx-auto text-gray-900 bg-white rounded-lg lg:p-10">
+    <div id="category-wrap" class="flex flex-wrap items-start justify-start space-x-2">
+      <% @categories.each do |category| %>
+        <%= render 'category', category: category %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if current_user && current_user.admin? %>
+  <div class="text-center text-white">
+    <%= link_to 'New Category', new_category_path , class: 'btn btn-primary new-category' %>
+  </div>
+  <% end %>
+ 
+</div>
+
+
+<style type="text/css">
+  .category-header {
+    background-color: #22D3EE;
+    color: black;
+  }
+  
+  .new-category {
+    background-color: rgba(107, 114, 128, var(--tw-bg-opacity));
+    color: white;
+  }
+
+  .new-category:hover {
+    background-color: #22D3EE;
+    color: white;
+  }
+</style>

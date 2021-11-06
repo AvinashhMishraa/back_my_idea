@@ -1,0 +1,37 @@
+<div class="mt-5">
+  <%= form_with(model: category) do |form| %>
+    <% if category.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+        <ul>
+          <% category.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field flex space-x-2 category-name-label">
+      <%= form.label :name, class:"label mt-2" %>
+      <%= form.text_field :name, class:"input" %>
+    </div>
+
+    <div class="actions mt-4 mx-40 text-black form-submit">
+      <%#= form.submit %>
+      <%= submit_tag "Update Category", class: 'btn btn-primary update-category mt-8 ml-28' %>
+    </div>
+  <% end %>
+</div>
+
+
+<style type="text/css">
+  .update-category:hover {
+       background-color: blue;
+       color: white;
+  }
+  .category-name-label {
+    margin-left: -45px;
+    width: 463px;
+  }
+</style>

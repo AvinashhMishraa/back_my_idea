@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+
   # get 'checkout', to: "billing#show"
 
   get 'checkout', to: "checkouts#show"
@@ -33,6 +34,9 @@ Rails.application.routes.draw do
   get "search", to: "projects#search"
 
   resource :subscription
+
+  # resource :categories
+  resources :categories
 
   root to: 'projects#index'
 end

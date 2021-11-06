@@ -1,0 +1,13 @@
+.category-link {
+	padding: 5px;
+
+	a {
+		color: #FFFFFF;
+
+		.bg-secondary {
+			&:hover {
+				background-color: rgba(30, 64, 175, var(--tw-bg-opacity));
+			}
+		}
+	}
+}

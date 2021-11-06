@@ -27,3 +27,13 @@ require("easy-autocomplete")
 import "stylesheets/application"
 // import "controllers"
 // import "components/stripe";
+
+import 'select2'
+import 'select2/dist/css/select2.css'
+
+
+// $(document).on("turbolinks.load", ()=>{
+// 	$('.select2').select2()
+// });
+
+// $('.select2').select2();
