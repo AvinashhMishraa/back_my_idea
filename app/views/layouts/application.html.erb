@@ -45,8 +45,6 @@
 
             <%= link_to 'Categories', categories_path , class: "btn btn-white mb-2 lg:mb-0 w-28" %>
 
-            <%##########################################################################################%>
-
             <%#= form_with(url: "/search", method: "get", local: true) do |form|%>
               <%#= form.label :categories, class: "label" %>
               <%#= form.collection_select :category_ids, Category.order(:name), :id, :name, {}, {class: 'select2 w-full box-border bg-white border-solid border-2 border-gray-600 z-50', multiple: true}%>
@@ -59,32 +57,73 @@
               <%= submit_tag("", id: "search_submit")%>
             <% end %>
 
-            <%##########################################################################################%>
-
           </div>
 
           <div class="items-center block w-full mt-2 text-center lg:flex lg:flex-row lg:flex-1 lg:mt-0 lg:text-left lg:justify-end">
 
-            <div id= "search-data" class="searchbar">
-              <%= form_with(url: "/search", method: "get", local: true) do |form|%>
+            <!-- <div class="search-box mr-2">
+                <button class="btn-search"><i class="fas fa-search"></i></button>
+                <input type="text" class="input-search" placeholder="Type to Search...">
+            </div> -->
+
+            <!-- <div class="search-box mr-2">
+                <%#= form_with(url: "/search", method: "get", local: true , class: "search-form") do |form|%>
+                  <%# @titles = Project.pluck(:title)%>
+                  <button class="btn-search"><i class="fas fa-search"></i></button>
+                  <input type="text" class="input-search" placeholder="Type to Search..." data-behavior="autocomplete" name="q" id="query">
+                <%# end %>
+            </div> -->
+
+            <div class="search -mr-4" id="search-id" onclick="function2()">
+              <div class="icon" id="id1"></div>
+              <div class="input" id="id2">
+                  <%= form_with(url: "/search", method: "get", local: true , class: "search-form") do |form|%>
+                    <% @titles = Project.pluck(:title)%>
+                    <!-- <input type="text" placeholder="Search" id="mysearch"> -->
+                    <input type="text" placeholder="Search" data-behavior="autocomplete" name="q" id="query" onkeyup="myFunction()" class="search-input-id">
+                    <%#= form.text_field :q, id: "query", placeholder: 'Search', data: {behavior: "autocomplete"} %>
+                  <% end %>
+              </div>
+              <!-- <span class="clear" onclick="document.getElementById('mysearch').value = ''"></span> -->
+              <span class="clear" onclick="document.getElementById('query').value = ''"></span>
+            </div>
+
+            <!-- <div id= "search-data" class="searchbar"> -->
+              <%#= form_with(url: "/search", method: "get", local: true) do |form|%>
                 <%#= label_tag(:q,"") %>
                 <%#= text_field_tag(:q) %>
-                <% @titles = Project.pluck(:title)%>
-                <%= form.text_field :q, id: "query", placeholder: 'Search', data: {behavior: "autocomplete"} %>
+                <%# @titles = Project.pluck(:title)%>
+                <%#= form.text_field :q, id: "query", placeholder: 'Search', data: {behavior: "autocomplete"} %>
                 <!-- <input type="search" placeholder="Search" data-behavior="autocomplete" name="q" id="query"> -->
                 <!-- <span class="input-group-btn"> -->
                   <%#= submit_tag "Search", class: 'btn btn-default search-btn' %>
                   <%#= form.submit "Search", class: 'btn btn-default search-btn' %>
                 <!-- </span> -->
-              <% end %>
-            </div>
+              <%# end %>
+            <!-- </div> -->
 
             <!-- <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" method="GET" formaction="/search"></input>
               <button class="btn btn-default" type="submit">Search</button>
             </form> -->
 
-            <%= link_to "Shopping Cart", shoppingcart_path, class: "btn btn-white mb-2 lg:mb-0 lg:mr-2 bg-yellow-500 text-white" %>
+            
+            <%######################### Shopping Cart Icon ##############################%>
+
+            <li class="font-sans block mt-4 lg:inline-block lg:mt-0 lg:ml-6 align-middle text-white hover:text-yellow-500 mr-2">
+              <a href="/checkout/cart" role="button" class="relative flex">
+                <svg class="flex-1 w-8 h-8 fill-current" viewbox="0 0 24 24">
+                  <path d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z"/>
+                  </svg>
+                  <span class="absolute right-0 top-0 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center"><%= @cart.count%>
+                </span>
+              </a>
+            </li>
+                
+            <%#= link_to "Shopping Cart", shoppingcart_path, class: "btn btn-white mb-2 lg:mb-0 lg:mr-2 bg-yellow-500 text-white" %>
+
+            <%########################################################%>
+            
             <% if user_signed_in? %>
               <%= link_to "Account", edit_user_registration_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-default mb-2 lg:mb-0 block" %>
@@ -133,6 +172,7 @@
 
     #category_id:hover {
       color: black;
+      background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
     }
 
     /*.category-filter:hover {
@@ -170,7 +210,8 @@
           // var url = "http://localhost:3000/projects/" + $input.getSelectedItemData().id;
           // console.log(url)
           $input.val("");
-          Turbolinks.visit(url);
+          // Turbolinks.visit(url);
+          window.location = url
         }
       }
   };
@@ -187,3 +228,211 @@
 
 
 <%= javascript_pack_tag "projects.js" %>
+
+
+<!-- <style type="text/css">
+  .search-box{
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+  }
+  .input-search{
+    height: 50px;
+    width: 50px;
+    border-style: none;
+    padding: 10px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    outline: none;
+    border-radius: 100px;
+    transition: all .5s ease-in-out;
+    background-color: #22a6b3;
+    padding-right: 40px;
+    color:#fff;
+  }
+  .input-search::placeholder{
+    color:rgba(255,255,255,.5);
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 100;
+  }
+  .btn-search{
+    width: 50px;
+    height: 50px;
+    border-style: none;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    border-radius: 50%;
+    position: absolute;
+    right: 0px;
+    color:#ffffff ;
+    background-color:transparent;
+    pointer-events: painted;  
+  }
+  .btn-search:focus ~ .input-search{
+    width: 300px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom:1px solid rgba(255,255,255,.5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+  }
+  .input-search:focus{
+    width: 300px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom:1px solid rgba(255,255,255,.5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+  }
+</style> -->
+
+
+<style type="text/css">
+    .search {
+      position: relative;
+      height: 38px;
+      width: 38px;
+      border-radius: 100px !important;
+      transition: all .5s ease-in-out;
+      background-color: white;
+      overflow: hidden;
+    }
+
+    .search.active {
+      width: 360px;
+    }
+
+    .search .icon {
+      position: absolute;
+      left: 0;
+      width: 38px;
+      height: 38px;
+      background-color: white;
+      border-radius: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    .search .icon::before {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border: 3px solid #00aced;
+      border-radius: 50%;
+      transform: translate(-3px,-3px)
+    }
+
+    .search .icon::after {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 12px;
+      background-color: #00aced;
+      transform: translate(6px,6px) rotate(315deg);
+    }
+
+    .search .input {
+      position: relative;
+      width: 300px;
+      height: 37px;
+      left: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1px;
+      /*background-color: black;*/
+      margin-left: -7px;
+      background-color: white;
+    }
+
+    .search-input-id {
+      position: absolute;
+      width: 295px;
+      height: 37px;
+      /*border: none;*/
+      outline: none !important;
+      font-size: 18px;
+      padding: 10px 0;
+      margin-top: -18px !important;
+      margin-left: -6px;
+    }
+
+    /*.search .input .search-form input {*/
+      /* it is same class as search-input-id */
+      /*position: absolute;*/
+      /*width: 100%;*/
+      /*height: 100%;*/
+      /*width: 330px;*/
+      /*height: 45px !important;*/
+      /*border: none;*/
+      /*outline: none !important;*/
+      /*font-size: 18px;*/
+      /*padding: 10px 0;*/
+      /*background-color: black;*/
+      /*background-color: white;*/
+      /*margin-top: -17px;*/
+      /*margin-left: -12px;*/
+    /*}*/
+
+    .clear {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      right: 15px;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: -6px;
+    }
+
+    .clear::before {
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: 15px;
+      background: black;
+      transform: rotate(45deg);
+    }
+
+    .clear::after {
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: 15px;
+      background: black;
+      transform: rotate(315deg);
+    }
+  
+</style>
+
+
+<script type="text/javascript">
+  const icon = document.querySelector('.icon');
+  const search = document.querySelector('.search');
+  icon.onclick = function(){
+    search.classList.toggle('active')
+  }
+
+  // const icon = document.querySelector('#id1');
+  // const search = document.querySelector('#search-id');
+  // icon.onclick = function(){
+  //   search.classList.toggle('active')
+  // }
+
+  function myFunction() {
+    var x = document.getElementById("search-id").style.overflow = "visible";
+  }
+
+  function function2() {
+    var x = document.getElementById("search-id").style.overflow = "hidden";
+  }
+</script>

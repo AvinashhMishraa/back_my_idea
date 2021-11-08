@@ -1,6 +1,6 @@
 <%= paginator.render do %>
   <nav>
-    <ul class="pagination">
+    <ul class="pagination", id="pagination-id">
       <%= first_page_tag unless current_page.first? %>
       <%= prev_page_tag unless current_page.first? %>
       <% each_page do |page| %>
@@ -49,4 +49,17 @@
     display: inline-block;
   }
 
+  .current-page-link {
+      background: cornflowerblue;
+  }
+
 </style>
+
+<script type="text/javascript">
+  var elements = document.getElementById("pagination-id").children
+  for (var i = 0; i < elements.length; i++) {
+     if (elements[i].classList.contains("active")) {
+       elements[i].children[0].className = "current-page-link";
+     }
+  }
+</script>
