@@ -1,0 +1,118 @@
+// Sass variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+ $sidebar-width: 242px;
+
+// Active Admin's got SASS!
+//@import "~@activeadmin/activeadmin/src/scss/mixins";
+//@import "~@activeadmin/activeadmin/src/scss/base";
+$primary-color: #0000FF;
+@import '~arctic_admin/src/scss/main';
+
+// Overriding any non-variable Sass must be done after the fact.
+// For example, to change the default status-tag color:
+//
+//   .status_tag { background: #6090DB; }
+
+//@import "app/assets/stylesheets/actiontext.scss";
+
+.sidebar_open {
+    width: 450px !important;
+}
+
+.sidebar_custom {
+    max-height: 480px;
+    overflow: auto;
+}
+
+.sidebar:before{
+    //color: #D462FF;
+}
+
+.sidebar_open:before{
+    //color: #D462FF;
+}
+
+.table_tools {
+	display: flex;
+	flex-direction: column;
+	row-gap: 5px;
+}
+
+#tabs {
+    width: 180px !important;
+}
+
+#wrapper {
+	margin-left: -35px;
+}
+
+thead th a {
+    font-size: 13px;
+    font-weight: bold;
+    //color: #4b5563;
+    color: #484848;
+}
+
+thead th.col {
+    font-size: 13px;
+    font-weight: bolder;
+    color: #484848;
+}
+
+tbody tr td {
+	color: black;
+}
+
+.menu_item {
+    font-weight: bold;
+}
+
+.filter_form_field {
+    color: darkcyan;
+    //font-size: small;
+    //font-size: medium;
+    font-size: 15px !important;
+    font-weight: bold;
+}
+
+input[type="submit"] {
+    font-weight: bold;
+    font-size: medium;
+}
+
+a.clear_filters_btn {
+    font-weight: bold;
+}
+
+.action_item {
+    font-weight: bold;
+}
+
+.member_link {
+    font-weight: bolder;
+}
+
+#footer {
+    margin-left: 10px;
+    margin-top: 10px !important;
+    height: 50px;
+}
+
+#q_admin{
+    width: 395px;
+}
+
+.yes {
+   background-color: #229954 !important;
+   font-weight: bolder;
+}
+
+.no {
+    color: white;
+    font-weight: bolder;
+}

@@ -11,7 +11,6 @@ class Project < ApplicationRecord
   has_many :categories, through: :categories_projects
 
 
-
   # has_many :perks, dependent: :destroy
   # accepts_nested_attributes_for :perks, allow_destroy: true, reject_if: proc { |attr| attr['title'].blank? }
   after_update :create_and_assign_new_stripe_price, if: :saved_change_to_price?
@@ -78,6 +77,38 @@ class Project < ApplicationRecord
   #   }
   # end
 
+
+  ################ Active Admin ###################
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i(category_eq thumbnail_eq comment_contains comment_equals comment_starts_with comment_ends_with description_contains)
+  end
+
+  def self.description_contains(value)
+    where(id: ActionText::RichText.all.where("LOWER(body) LIKE ?", "%#{value}%".downcase).pluck(:record_id))
+  end
+
+  def self.thumbnail_eq(value)
+    # ActiveStorage::Blob.all.where("filename LIKE ?", "%#{value}%")
+    project_list = []
+    self.all.each do |project|
+      if project.thumbnail.present? && project.thumbnail_blob.filename == value
+        project_list << project
+      end
+    end
+    where(id: project_list.pluck(:id))
+  end
+
+  def self.category_eq(value)
+    where(id: CategoriesProject.where(category_id: Category.where("LOWER(name) LIKE ?", "%#{value}%".downcase).pluck(:id)).pluck(:project_id))
+  end
+
+  def self.comment_contains(value)
+    # where(id: Comment.where("body LIKE ?", "%#{value}%").pluck(:commentable_id))
+    joins(:comments).where('LOWER(comments.body)  LIKE ?', "%#{value}%".downcase)
+  end
+
+  ################ Active Admin ###################
 
 end
 

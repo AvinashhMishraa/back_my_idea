@@ -66,3 +66,10 @@ gem 'pry'
 gem 'money-rails'
 gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 gem 'searchkick'
+
+
+# For activeadmin gem, we need integrations with other gems like devise, cancancan, draper & pundit. However it's not mandatory
+gem 'activeadmin'
+gem 'cancancan'
+gem 'draper'
+gem 'pundit'
