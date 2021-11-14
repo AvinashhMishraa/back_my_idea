@@ -10,7 +10,8 @@ import 'arctic_admin'
 
 $(document).ready(function() {
 	$("#footer").empty();
-	$("#footer").append('<span>powered by </span><a href="http://localhost:3000/"><b>Back My Idea</b></a>');
+	// $("#footer").append('<span>powered by </span><a href="http://localhost:3000/"><b>Back My Idea</b></a>');
+    $("#footer").append('<span>powered by </span><a href="https://back-my-idea.herokuapp.com/"><b>Back My Idea</b></a>');
 	$('#filters_sidebar_section, #search_status_sidebar_section').wrapAll('<div class="sidebar_custom"></div>');
 
     // for showing custom filter search result in sidebar
