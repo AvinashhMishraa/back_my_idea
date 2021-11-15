@@ -11,7 +11,7 @@
   #   permitted
   # end
 
-  permit_params :title, :donation_goal, :user_id, :current_donation_amount, :expires_at, :status, :price, :sales_count, :stripe_product_id, :stripe_price_id, :currency, :description
+  permit_params :title, :donation_goal, :user_id, :current_donation_amount, :expires_at, :status, :price, :sales_count, :stripe_product_id, :stripe_price_id, :currency, :description, :category_ids=>[]
 
   scope :all
   scope :active
@@ -25,6 +25,8 @@
     link_to "Deactivate", deactivate_admin_project_path(project), method: :put if project.status == "active"
   end
 
+  ############## Custom Action #################
+
   member_action :activate, method: :put do
     project = Project.find(params[:id])
     project.update(status: "active")
@@ -37,8 +39,20 @@
     redirect_to admin_project_path(project)
   end
 
+  member_action :create, method: :post do
+    categories = permitted_params[:project][:category_ids][1..-1]
+    params[:project].delete("category_ids")
+    @project = Project.new(permitted_params[:project])
+    if @project.save
+      category_ids = Category.where(name: categories).pluck(:id)
+      category_ids.each do |category_id|
+        CategoriesProject.create(project_id: @project.id, category_id: category_id)
+      end
+    end
+    redirect_to admin_projects_path
+  end
 
-  ############### Custom Column ###############
+  ############### Custom Column #################
 
   index do
     selectable_column
@@ -89,6 +103,19 @@
   filter :category, as: :select, collection: proc { Category.all.pluck(:name).uniq }, label: "Categories"
   filter :comment_contains, as: :string, label: "Comments"
 
-  ##############################################
+  ############### Custom Form ###############
+
+  form do |f|
+    # f.semantic_errors # shows errors on :base
+    f.inputs 'Project Details' do
+      f.inputs :user, :title, :donation_goal, :current_donation_amount, :expires_at, :status, :price, :currency
+    end
+    f.inputs "Project Category" do
+      f.input :categories, :as => :check_boxes, :collection => Category.all.pluck(:name)
+    end
+    f.actions
+  end
+
+  ###########################################
 
 end
