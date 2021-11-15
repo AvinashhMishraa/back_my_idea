@@ -15,6 +15,13 @@ $(document).ready(function() {
 	$('#filters_sidebar_section, #search_status_sidebar_section').wrapAll('<div class="sidebar_custom"></div>');
     $("#categories_project_submit_action input").val('Map Project Category');
 
+///////////////////////////////////
+    if ($(".blank_slate_container span").text() == "There are no Project Categories yet. Create one") {
+        $(".blank_slate_container").empty();
+        $(".blank_slate_container").append('<span class="blank_slate">There are no Project Category mappings yet. <a href="/admin/project_categories/new">Create one</a></span>');
+    }
+///////////////////////////////////
+
     // for showing custom filter search result in sidebar
     var queryString = window.location.search;
     queryString = queryString.replaceAll("q%5B","");
