@@ -13,6 +13,7 @@ $(document).ready(function() {
 	// $("#footer").append('<span>powered by </span><a href="http://localhost:3000/"><b>Back My Idea</b></a>');
     $("#footer").append('<span>powered by </span><a href="https://back-my-idea.herokuapp.com/"><b>Back My Idea</b></a>');
 	$('#filters_sidebar_section, #search_status_sidebar_section').wrapAll('<div class="sidebar_custom"></div>');
+    $("#categories_project_submit_action input").val('Map Project Category');
 
     // for showing custom filter search result in sidebar
     var queryString = window.location.search;
@@ -43,7 +44,7 @@ $(document).ready(function() {
        		i=i+1;
        	}
     }
-    if ($(".panel_contents ul li:first")[0].innerText == "None") {
+    if ( $(".panel_contents ul li:first").length != 0 && $(".panel_contents ul li:first")[0].innerText == "None") {
     		$(".panel_contents ul li:first").remove();
     }
 });
