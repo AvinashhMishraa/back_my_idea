@@ -9,6 +9,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.0",
+    "activeadmin_quill_editor": "blocknotes/activeadmin_quill_editor",
     "arctic_admin": "^4.0.1",
     "autoprefixer": "^9",
     "axios": "^0.23.0",

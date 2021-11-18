@@ -13,13 +13,6 @@
 $primary-color: #0000FF;
 @import '~arctic_admin/src/scss/main';
 
-// Overriding any non-variable Sass must be done after the fact.
-// For example, to change the default status-tag color:
-//
-//   .status_tag { background: #6090DB; }
-
-//@import "app/assets/stylesheets/actiontext.scss";
-
 .sidebar_open {
     width: 450px !important;
 }
@@ -115,4 +108,156 @@ a.clear_filters_btn {
 .no {
     color: white;
     font-weight: bolder;
+}
+
+li#project_user_input {
+    margin-left: -265px;
+}
+
+select#project_user_id {
+    margin-left: 250px;
+    width: 710px;
+}
+li#project_title_input {
+    margin-left: -278px;
+}
+
+input#project_title {
+    margin-left: 585px;
+    width: 710px;
+}
+
+li#project_donation_goal_input {
+    margin-left: -195px;
+}
+
+input#project_donation_goal {
+    margin-left: 502px;
+    width: 710px;
+}
+
+li#project_current_donation_amount_input {
+    margin-left: -105px;
+}
+
+input#project_current_donation_amount {
+    margin-left: 411px;
+    width: 710px;
+}
+
+li#project_expires_at_input {
+    margin-left: -227px;
+}
+
+.project_expires {
+    display: flex;
+    flex-direction: row;
+    gap: 49px;
+}
+
+li#project_status_input {
+    margin-left: -256px;
+}
+
+input#project_status {
+    margin-left: 560px;
+    width: 710px;
+}
+
+li#project_price_input {
+    margin-left: -265px;
+}
+
+input#project_price {
+    margin-left: 570px;
+    width: 710px;
+}
+
+li#project_currency_input {
+    margin-left: -232px;
+}
+
+input#project_currency {
+    margin-left: 538px;
+    width: 710px;
+}
+
+#project_description_input .ql-editor p {
+    max-width: 990px;
+}
+
+li#user_email_input {
+    margin-left: -250px;
+}
+
+li#user_reset_password_token_input {
+    margin-left: -120px;
+}
+
+li#user_first_name_input {
+    margin-left: -217px;
+}
+
+li#user_last_name_input {
+    margin-left: -217px;
+}
+
+li#user_admin_input {
+    margin-left: -1px;
+    padding-left: 8px;
+}
+
+li#user_uid_input {
+    margin-left: -275px;
+}
+
+input#user_email {
+    margin-left: 420px;
+    width: 830px;
+}
+
+input#user_first_name {
+    margin-left: 367px;
+    width: 850px;
+}
+
+input#user_last_name {
+    margin-left: 367px;
+    width: 850px;
+}
+
+input#user_uid {
+    margin-left: 425px;
+    width: 850px;
+}
+
+li#user_password_input {
+    margin-left: -215px;
+}
+
+input#user_password {
+    margin-left: 385px;
+    width: 830px;
+}
+
+li#user_password_confirmation_input {
+    margin-left: -115px;
+}
+
+input#user_password_confirmation {
+    width: 830px;
+}
+
+input#user_first_name {
+    margin-left: 387px;
+    width: 830px;
+}
+
+input#user_last_name {
+    margin-left: 387px;
+    width: 830px;
+}
+
+input#user_admin {
+    margin-left: 125px;
 }

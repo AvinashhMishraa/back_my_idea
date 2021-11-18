@@ -11,7 +11,7 @@
   #   permitted
   # end
 
-  permit_params :title, :donation_goal, :user_id, :current_donation_amount, :expires_at, :status, :price, :sales_count, :stripe_product_id, :stripe_price_id, :currency, :description, :category_ids=>[]
+  permit_params :title, :donation_goal, :user_id, :current_donation_amount, :expires_at, :status, :price, :sales_count, :stripe_product_id, :stripe_price_id, :currency, :description, category_ids: []
 
   scope :all
   scope :active
@@ -108,7 +108,11 @@
   form do |f|
     # f.semantic_errors # shows errors on :base
     f.inputs 'Project Details' do
+      # f.input :title, as: :quill_editor   # it is giving Formtastic::UnknownInputError in Admin::Projects#new (Unable to find input class QuillEditorInput)
       f.inputs :user, :title, :donation_goal, :current_donation_amount, :expires_at, :status, :price, :currency
+    end
+    f.inputs 'Project Description' do
+      f.input :description, as: :text, :input_html => { class: 'test', :cols => 5, :rows => 10 }
     end
     f.inputs "Project Category" do
       f.input :categories, :as => :check_boxes, :collection => Category.all.pluck(:name)

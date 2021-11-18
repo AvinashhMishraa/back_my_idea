@@ -5,7 +5,8 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :first_name, :last_name, :admin, :uid, :provider, :access_code, :publishable_key, :pay_data, :processor, :processor_id, :trial_ends_at, :card_type, :card_last4, :card_exp_month, :card_exp_year, :extra_billing_info, :plan, :quantity, :card_token, :pay_fake_processor_allowed
+  # permit_params :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :first_name, :last_name, :admin, :uid, :provider, :access_code, :publishable_key, :pay_data, :processor, :processor_id, :trial_ends_at, :card_type, :card_last4, :card_exp_month, :card_exp_year, :extra_billing_info, :plan, :quantity, :card_token, :pay_fake_processor_allowed
+  permit_params :email, :password, :password_confirmation, :first_name, :last_name, :admin
   #
   # or
   #
@@ -54,5 +55,15 @@ ActiveAdmin.register User do
   # this is  common way to increase page performance is to eliminate N+1 queries by eager loading associations
   # includes :projects
 
-  
+  ############### Custom Form ###############
+
+  form do |f|
+    f.inputs 'Details' do
+      f.inputs :email, :password, :password_confirmation, :first_name, :last_name, :admin
+    end
+    f.actions
+  end
+
+  ###########################################
+
 end

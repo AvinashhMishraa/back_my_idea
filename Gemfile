@@ -73,3 +73,4 @@ gem 'activeadmin'
 gem 'cancancan'
 gem 'draper'
 gem 'pundit'
+# gem "activeadmin_quill_editor", "~> 0.3.4"

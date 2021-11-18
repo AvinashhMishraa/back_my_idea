@@ -8,19 +8,21 @@ import "@activeadmin/activeadmin";
 import "@fortawesome/fontawesome-free/css/all.css";
 import 'arctic_admin'
 
+require('activeadmin_quill_editor');
+// require("trix")
+
 $(document).ready(function() {
+
 	$("#footer").empty();
 	// $("#footer").append('<span>powered by </span><a href="http://localhost:3000/"><b>Back My Idea</b></a>');
     $("#footer").append('<span>powered by </span><a href="https://back-my-idea.herokuapp.com/"><b>Back My Idea</b></a>');
 	$('#filters_sidebar_section, #search_status_sidebar_section').wrapAll('<div class="sidebar_custom"></div>');
     $("#categories_project_submit_action input").val('Map Project Category');
 
-///////////////////////////////////
     if ($(".blank_slate_container span").text() == "There are no Project Categories yet. Create one") {
         $(".blank_slate_container").empty();
         $(".blank_slate_container").append('<span class="blank_slate">There are no Project Category mappings yet. <a href="/admin/project_categories/new">Create one</a></span>');
     }
-///////////////////////////////////
 
     // for showing custom filter search result in sidebar
     var queryString = window.location.search;
@@ -54,4 +56,57 @@ $(document).ready(function() {
     if ( $(".panel_contents ul li:first").length != 0 && $(".panel_contents ul li:first")[0].innerText == "None") {
     		$(".panel_contents ul li:first").remove();
     }
+
+    $('#project_expires_at_input .fragments .fragments-group').css('margin-left',532+'px');
+    $('#project_expires_at_input .fragments .fragments-group').addClass("project_expires");
+
+    $('#user_admin_input label input').remove();
+    $('#user_admin_input label').append('<input type="checkbox" name="user[admin]" id="user_admin" value="1">');
+
+    /////////////Integrating Quill Editor///////////////////
+
+    if (window.location.href == "http://localhost:3000/admin/projects/new") {
+
+      $('#project_description').wrapAll('<div id="project_description_input"></div>');
+      var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'],         // toggled buttons
+        ['blockquote', 'link', 'code-block'],
+
+        // [{ 'header': 1 }, { 'header': 2 }],             // custom button values
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'script': 'sub'}, { 'script': 'super' }],       // superscript/subscript
+        [{ 'indent': '-1'}, { 'indent': '+1' }],           // outdent/indent
+        [{ 'direction': 'rtl' }],                          // text direction
+
+        [{ 'size': ['small', false, 'large', 'huge'] }],   // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ 'color': ['#F00', '#0F0', '#00F', '#000', '#FFF', 'color-picker'] }, { 'background': ['#F00', '#0F0', '#00F', '#000', '#FFF', 'color-picker'] }],        // dropdown with defaults from theme
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+
+        ['clean'],                                          // remove formatting button
+      ];
+
+      var quill = new Quill('#project_description_input', {
+        modules: {
+          toolbar: toolbarOptions
+          // toolbar: true
+        },
+        theme: 'snow',
+        placeholder: 'Description',
+      });
+
+      $('#project_description_input .ql-editor p:last').remove();
+      $('#project_description_input .ql-tooltip input').remove();
+      $('#project_description_input .ql-tooltip a:first').after('<input type="text" data-formula="e=mc^2" data-link="https://quilljs.com" data-video="Embed URL" name="project[description]" >');
+
+      $( "#project_submit_action" ).click(function() {
+        $('#project_description_input .ql-tooltip input').val(quill.root.innerHTML);
+      });
+
+    }
+
+    ////////////////////////////////////////////////////////
+
 });
