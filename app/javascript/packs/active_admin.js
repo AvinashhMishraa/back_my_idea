@@ -65,7 +65,7 @@ $(document).ready(function() {
 
     /////////////Integrating Quill Editor///////////////////
 
-    if (window.location.href == "http://localhost:3000/admin/projects/new") {
+    if (window.location.href == "https://back-my-idea.herokuapp.com/admin/projects/new") {
 
       $('#project_description').wrapAll('<div id="project_description_input"></div>');
       var toolbarOptions = [
