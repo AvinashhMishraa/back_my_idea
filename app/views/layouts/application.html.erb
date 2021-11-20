@@ -14,7 +14,7 @@
     <script src="https://js.stripe.com/v3/"></script>
   </head>
 
- <body class="text-blue-100 bg-blue-800">
+ <body class="bg-pink-100">
 
   <% flash.each do |type, message| %>
     <% if type == "alert" %>
@@ -29,10 +29,10 @@
     <% end %>
   <% end %>
 
-    <header class="mb-4">
+    <header class="mb-4 bg-white">
       <nav class="flex flex-wrap items-center justify-between px-3 py-3 text-gray-700 lg:px-10">
         <div class="flex items-center mr-6 flex-no-shrink">
-          <%= link_to "Back My Idea", root_path, class:"link text-lg tracking-wider font-semibold uppercase" %>
+          <%= link_to "Back My Idea", root_path, class:"link text-lg tracking-wider font-semibold uppercase text-black root_path" %>
         </div>
         <div class="block lg:hidden">
           <button class="flex items-center px-3 py-2 text-white border border-gray-500 rounded hover:text-gray-200 hover:border-gray-200">
@@ -41,9 +41,9 @@
         </div>
         <div class="items-center block w-full text-center lg:flex-1 lg:flex lg:text-left">
           <div class="space-x-2 flex flex-row">
-            <%= link_to "New Project", new_project_path, class: "btn btn-white mb-2 lg:mb-0" %>
+            <%= link_to "New Project", new_project_path, class: "btn btn-white mb-2 lg:mb-0 header-element" %>
 
-            <%= link_to 'Categories', categories_path , class: "btn btn-white mb-2 lg:mb-0 w-28" %>
+            <%= link_to 'Categories', categories_path , class: "btn btn-white mb-2 lg:mb-0 w-28 header-element" %>
 
             <%#= form_with(url: "/search", method: "get", local: true) do |form|%>
               <%#= form.label :categories, class: "label" %>
@@ -110,7 +110,7 @@
             
             <%######################### Shopping Cart Icon ##############################%>
 
-            <li class="font-sans block mt-4 lg:inline-block lg:mt-0 lg:ml-6 align-middle text-white hover:text-yellow-500 mr-2">
+            <li class="font-sans block mt-4 lg:inline-block lg:mt-0 lg:ml-6 align-middle text-blue-900 hover:text-yellow-500 mr-2">
               <a href="/checkout/cart" role="button" class="relative flex">
                 <svg class="flex-1 w-8 h-8 fill-current" viewbox="0 0 24 24">
                   <path d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z"/>
@@ -125,11 +125,11 @@
             <%########################################################%>
             
             <% if user_signed_in? %>
-              <%= link_to "Account", edit_user_registration_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>
-              <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-default mb-2 lg:mb-0 block" %>
+              <%= link_to "Account", edit_user_registration_path, class: "btn btn-white mb-2 lg:mb-0 header-element" %>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-white mb-2 lg:mb-0 header-element" %>
             <% else %>
-              <%= link_to "Login", new_user_session_path, class:"btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>
-              <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-default block" %>
+              <%= link_to "Login", new_user_session_path, class:"btn btn-white mb-2 lg:mb-0 header-element" %>
+              <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-white mb-2 lg:mb-0 header-element" %>
             <% end %>
           </div>
         </div>
@@ -139,6 +139,36 @@
     <main class="px-4 lg:px-10">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
+    <footer class="bg-gray-500 h-30 mt-32">
+      <div class="flex flex-row -mt-16">
+        <div class="btn bg-transparent hover:bg-white hover:text-gray-800 transition-colors h-11 w-11 admin-class">
+          <a aria-label="Homepage" title="GitHub" class="btn h-7 w-7 bg-white fart" href="http://localhost:3000/admin">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 admin-icon" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+            </svg>
+          </a>
+          <h2 class="-ml-4 mt-0.5">Admin</h2>
+        </div>
+        <div class="container pl-12 pt-2 flex flex-row space-x-2 footer-items w-20">
+            <div class="btn bg-transparent hover:bg-white hover:text-gray-800 transition-colors h-11 w-11 github-class">
+              <a aria-label="Homepage" title="GitHub" class="btn h-7 w-7 bg-white fart" href="https://github.com/AvinashhMishraa/back_my_idea">
+                <svg aria-hidden="true" height="26" viewBox="0 0 16 16" version="1.1" width="26" data-view-component="true" class="octicon octicon-mark-github">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+              </a>
+            </div>
+            <div class="btn bg-transparent hover:bg-white hover:text-gray-800 transition-colors h-11 w-11 github-class">
+              <a aria-label="Homepage" title="GitHub" class="btn h-7 w-7 bg-white fart" href="https://www.linkedin.com/in/jamesemwallis">
+                <svg class="linkedin-icon" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
+              </a>
+            </div>
+        </div>
+      </div>
+      <div class="developer flex flex-col">
+        <h1>Developed by - Avinash Kumar Mishra</h1>
+        <h1>Mob No - 7814699289</h1>
+      </div>
+    </footer>
   </body>
 </html>
 
@@ -308,7 +338,8 @@
       left: 0;
       width: 38px;
       height: 38px;
-      background-color: white;
+      /*background-color: white;*/
+      background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
       border-radius: 60px;
       display: flex;
       justify-content: center;
@@ -322,7 +353,7 @@
       position: absolute;
       width: 18px;
       height: 18px;
-      border: 3px solid #00aced;
+      border: 3px solid #1E40AF;
       border-radius: 50%;
       transform: translate(-3px,-3px)
     }
@@ -332,7 +363,7 @@
       position: absolute;
       width: 3px;
       height: 12px;
-      background-color: #00aced;
+      background-color: #1E40AF;
       transform: translate(6px,6px) rotate(315deg);
     }
 
@@ -391,7 +422,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: -6px;
+      margin-right: -8px;
     }
 
     .clear::before {
@@ -399,7 +430,8 @@
       content: '';
       width: 1px;
       height: 15px;
-      background: black;
+      /*background: black;*/
+      background: blue;
       transform: rotate(45deg);
     }
 
@@ -408,7 +440,8 @@
       content: '';
       width: 1px;
       height: 15px;
-      background: black;
+      /*background: black;*/
+      background: blue;
       transform: rotate(315deg);
     }
   
@@ -435,4 +468,80 @@
   function function2() {
     var x = document.getElementById("search-id").style.overflow = "hidden";
   }
+
+
+
+  ////////////////////////////////////////////////////////////////
+
+  $('.easy-autocomplete').removeClass("eac-blue-light");
+
+  $('.search-form').bind('click keyup', function(){
+    $('#query').css('background-color', 'white');
+  });
+
 </script>
+
+
+
+
+<style type="text/css">
+  .root_path:hover{
+    color: black;
+    border-bottom: 2px solid blue;
+  }
+
+  .header-element:hover{
+    border-bottom: 2px solid red;
+  }
+
+  .search{
+    background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+  }
+
+  #id2{
+    background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+  }
+
+  .clear{
+    background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+    /*background: black solid;*/
+  }
+
+  #query{
+    border: #1E40AF solid;
+    background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+  }
+
+  .fart{
+    margin-left: -9.9px;
+  }
+
+  .octicon-mark-github{
+    margin-left: -13px;
+    margin-top: -6px;
+  }
+
+  .linkedin-icon{
+    margin-left: -12.5px;
+    margin-top: -4px;
+  }
+
+  .footer-items{
+    margin-left: 1050px;
+  }
+
+  .admin-class{
+    margin-top: 10px;
+    margin-left: 18px;
+  }
+
+  .admin-icon{
+    margin-left: -11.5px;
+    margin-top: -5px;
+  }
+
+  .developer{
+    margin-left: 500px;
+  }
+
+</style>
